@@ -60,7 +60,7 @@ export default function RootLayout({
               position="top-right"
               richColors
               closeButton
-              duration={4000}
+              duration={3000}
             />
           </ErrorBoundary>
         </ThemeProvider>
