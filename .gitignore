@@ -48,11 +48,6 @@ next-env.d.ts
 
 .vscode
 
-
-public/sitemap.xml
-public/sitemap-0.xml
-public/robots.txt
-
 # Sentry Auth Token
 .sentryclirc
 

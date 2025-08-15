@@ -3,6 +3,10 @@
 import React, { useState } from "react";
 import { toast } from "sonner";
 import { LoadingSpinner } from "@/components/common/LoadingSpinner";
+import { ThemeToggle } from "@/components/theme-toggle";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { copyToClipboard, generateId } from "@/lib/utils/common";
 
 export default function HomePage() {
@@ -74,100 +78,151 @@ export default function HomePage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
-      <div className="text-center space-y-8 max-w-2xl">
-        <div>
-          <h1 className="text-6xl font-bold text-gray-800 mb-4">Hello World</h1>
-          <p className="text-xl text-gray-600">
-            A minimal Next.js template with modern features
-          </p>
+    <div className="min-h-screen bg-gradient-to-br from-background to-muted/20 transition-colors">
+      {/* Header */}
+      <header className="border-b">
+        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+          <div className="flex items-center space-x-2">
+            <h2 className="text-xl font-semibold">Next.js Template</h2>
+            <Badge variant="secondary">v1.0</Badge>
+          </div>
+          <ThemeToggle />
         </div>
+      </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {/* Main Content */}
+      <main className="container mx-auto px-4 py-16">
+        <div className="text-center space-y-8 max-w-4xl mx-auto">
           <div className="space-y-4">
-            <h2 className="text-2xl font-semibold text-gray-700">Toast Examples</h2>
-            <div className="space-y-3">
-              <button
-                onClick={handleShowToast}
-                className="w-full bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-medium transition-colors"
-              >
-                Success Toast
-              </button>
-
-              <button
-                onClick={handleShowErrorToast}
-                className="w-full bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-lg font-medium transition-colors"
-              >
-                Error Toast
-              </button>
-
-              <button
-                onClick={handleShowInfoToast}
-                className="w-full bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-medium transition-colors"
-              >
-                Info Toast
-              </button>
-
-              <button
-                onClick={handleShowWarningToast}
-                className="w-full bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-3 rounded-lg font-medium transition-colors"
-              >
-                Warning Toast
-              </button>
+            <h1 className="text-6xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+              Next.js Minimal Template
+            </h1>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              A modern, production-ready template with TypeScript, Tailwind CSS v4,
+              and essential features for rapid development. Perfect for AI tools like v0.
+            </p>
+            <div className="flex flex-wrap justify-center gap-2 mt-6">
+              <Badge>Next.js 14</Badge>
+              <Badge>TypeScript</Badge>
+              <Badge>Tailwind CSS v4</Badge>
+              <Badge>Radix UI</Badge>
+              <Badge>Dark Mode</Badge>
+              <Badge>AI-Friendly</Badge>
             </div>
           </div>
 
-          <div className="space-y-4">
-            <h2 className="text-2xl font-semibold text-gray-700">Utility Examples</h2>
-            <div className="space-y-3">
-              <button
-                onClick={handleAsyncOperation}
-                disabled={isLoading}
-                className="w-full bg-purple-500 hover:bg-purple-600 disabled:bg-purple-300 text-white px-6 py-3 rounded-lg font-medium transition-colors flex items-center justify-center"
-              >
-                {isLoading ? (
-                  <>
-                    <LoadingSpinner size="sm" className="mr-2" />
-                    Loading...
-                  </>
-                ) : (
-                  "Async Operation"
-                )}
-              </button>
+          {/* Feature Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
+            <Card>
+              <CardHeader>
+                <CardTitle>Toast Notifications</CardTitle>
+                <CardDescription>Beautiful toast notifications with Sonner</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <Button onClick={handleShowToast} className="w-full" variant="default">
+                  Success Toast
+                </Button>
+                <Button onClick={handleShowErrorToast} className="w-full" variant="destructive">
+                  Error Toast
+                </Button>
+                <Button onClick={handleShowInfoToast} className="w-full" variant="secondary">
+                  Info Toast
+                </Button>
+                <Button onClick={handleShowWarningToast} className="w-full" variant="outline">
+                  Warning Toast
+                </Button>
+              </CardContent>
+            </Card>
 
-              <button
-                onClick={handleGenerateId}
-                className="w-full bg-indigo-500 hover:bg-indigo-600 text-white px-6 py-3 rounded-lg font-medium transition-colors"
-              >
-                Generate ID
-              </button>
+            <Card>
+              <CardHeader>
+                <CardTitle>Utility Functions</CardTitle>
+                <CardDescription>Common utilities and async operations</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <Button
+                  onClick={handleAsyncOperation}
+                  disabled={isLoading}
+                  className="w-full"
+                  variant="secondary"
+                >
+                  {isLoading ? (
+                    <>
+                      <LoadingSpinner size="sm" className="mr-2" />
+                      Loading...
+                    </>
+                  ) : (
+                    "Async Operation"
+                  )}
+                </Button>
 
-              {generatedId && (
-                <div className="space-y-2">
-                  <p className="text-sm text-gray-600">Generated ID:</p>
-                  <div className="flex items-center space-x-2">
-                    <code className="bg-gray-100 px-3 py-2 rounded text-sm flex-1 text-left">
-                      {generatedId}
-                    </code>
-                    <button
-                      onClick={handleCopyId}
-                      className="bg-gray-500 hover:bg-gray-600 text-white px-3 py-2 rounded text-sm transition-colors"
-                    >
-                      Copy
-                    </button>
+                <Button onClick={handleGenerateId} className="w-full" variant="outline">
+                  Generate ID
+                </Button>
+
+                {generatedId && (
+                  <div className="space-y-2 pt-2">
+                    <p className="text-sm text-muted-foreground">Generated ID:</p>
+                    <div className="flex items-center space-x-2">
+                      <code className="bg-muted px-3 py-2 rounded text-sm flex-1 text-left font-mono">
+                        {generatedId}
+                      </code>
+                      <Button onClick={handleCopyId} size="sm" variant="ghost">
+                        Copy
+                      </Button>
+                    </div>
                   </div>
-                </div>
-              )}
-            </div>
+                )}
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Features Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-lg">🚀 Modern Stack</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">
+                  Built with Next.js 14, TypeScript, and Tailwind CSS v4 for optimal performance and developer experience.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-lg">🎨 Design System</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">
+                  Includes a complete design system with Radix UI components, dark mode support, and CSS variables.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-lg">🤖 AI-Friendly</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">
+                  Optimized structure and documentation for AI tools like v0, Cursor, and other code generation tools.
+                </p>
+              </CardContent>
+            </Card>
           </div>
         </div>
+      </main>
 
-        <div className="mt-8 pt-8 border-t border-gray-200">
-          <p className="text-sm text-gray-500">
-            Built with Next.js, TypeScript, Tailwind CSS, and Sonner
+      {/* Footer */}
+      <footer className="border-t mt-16">
+        <div className="container mx-auto px-4 py-8 text-center">
+          <p className="text-sm text-muted-foreground">
+            Built with Next.js, TypeScript, Tailwind CSS v4, and Radix UI
           </p>
         </div>
-      </div>
+      </footer>
     </div>
   );
 }

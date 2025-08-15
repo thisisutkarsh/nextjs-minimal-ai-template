@@ -18,3 +18,8 @@ export * from './ui/textarea';
 // Common Components
 export { default as LoadingSpinner } from './common/LoadingSpinner';
 export { ErrorBoundary } from './common/ErrorBoundary';
+
+// Theme Components
+export { ThemeProvider } from './theme-provider';
+export { ThemeToggle } from './theme-toggle';
+

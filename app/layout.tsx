@@ -3,6 +3,7 @@ import { Plus_Jakarta_Sans } from "next/font/google";
 import type { Metadata, Viewport } from "next";
 import { Toaster } from "sonner";
 import { ErrorBoundary } from "@/components/common/ErrorBoundary";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const inter = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -45,17 +46,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} font-sans antialiased`}>
-        <ErrorBoundary>
-          {children}
-          <Toaster
-            position="top-right"
-            richColors
-            closeButton
-            duration={4000}
-          />
-        </ErrorBoundary>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <ErrorBoundary>
+            {children}
+            <Toaster
+              position="top-right"
+              richColors
+              closeButton
+              duration={4000}
+            />
+          </ErrorBoundary>
+        </ThemeProvider>
       </body>
     </html>
   );
