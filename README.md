@@ -1,4 +1,4 @@
-# Next.js Minimal Template
+# Next.js Minimal AI Template
 
 > **Optimized for AI-assisted development and rapid prototyping**
 
@@ -22,8 +22,8 @@ A modern, production-ready Next.js template with TypeScript, Tailwind CSS v4, an
 ### Option 1: Clone and Use
 ```bash
 # Clone the repository
-git clone <your-repo-url>
-cd nextjs-minimal-template
+git clone https://github.com/thisisutkarsh/nextjs-minimal-ai-template.git
+cd nextjs-minimal-ai-template
 
 # Install dependencies
 npm install
